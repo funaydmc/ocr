@@ -1,1 +1,32 @@
-ocr_env
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+ocr_env/
+venv/
+env/
+
+# Test results and temporary files
+*_results_*.json
+*_test_result_*.json
+quick_test_result.json
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.temp
+*~
+
+# Model files (optional - uncomment if models are large)
+# onnx_models/*.onnx
