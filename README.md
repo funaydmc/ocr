@@ -64,12 +64,12 @@ python paddle_ocr_final.py
 
 ### Models
 - **Detection Model**: Input (1,3,640,640) → Output (1,1,640,640)
-- **Recognition Model**: Input (1,3,48,320) → Output (1,40,6625)
+- **Recognition Model**: Input (1,3,48,320) → Output (1,40,6624)
 
 ### Key Components
 - ✅ Text detection using probability heatmap
 - ✅ Text recognition with CTC decoding
-- ✅ PaddleOCR official character dictionary (6624 classes)
+- ✅ PaddleOCR official character dictionary (6623 characters + 1 blank = 6624 classes)
 - ✅ Proper character mapping with official keys
 - ✅ 90%+ accuracy on test dataset
 

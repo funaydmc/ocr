@@ -36,10 +36,10 @@ The OCR system consists of three essential files:
   - Height is fixed at 48 pixels
   - Width is fixed at 320 pixels
 - **Output**: Character probability logits
-  - Shape: `(1, 40, 6625)`
+  - Shape: `(1, 40, 6624)`
   - Data type: Float32
   - 40 time steps (sequence length)
-  - 6625 classes (1 blank + 6624 characters)
+  - 6624 classes (1 blank + 6623 characters)
 
 ## 📖 Dictionary File Format
 
@@ -48,7 +48,7 @@ The OCR system consists of three essential files:
 **Format Specification:**
 - Encoding: UTF-8
 - Line separator: LF (`\n`)
-- Total lines: 6624
+- Total lines: 6623
 - Each line contains exactly one character
 - No blank or empty lines
 - Includes: Chinese characters (simplified & traditional), English letters, numbers, punctuation
@@ -59,7 +59,7 @@ Line 1  → Index 1  → Character: '
 Line 2  → Index 2  → Character: 疗
 Line 3  → Index 3  → Character: 绚
 ...
-Line 6624 → Index 6624 → Character: (last character)
+Line 6623 → Index 6623 → Character: (last character)
 ```
 
 **Special Index:**
@@ -145,7 +145,7 @@ For each time step t from 0 to 39:
     class_index[t] = argmax(output_tensor[0, t, :])
 ```
 
-Result: Array of 40 integers, each in range [0, 6624]
+Result: Array of 40 integers, each in range [0, 6623]
 
 **Example Output:**
 ```
@@ -190,7 +190,7 @@ function ctc_decode(class_indices, character_dictionary):
 **Key CTC Rules:**
 1. **Blank Token (0)**: Always ignored in final output
 2. **Consecutive Duplicates**: Only first occurrence is kept
-3. **Valid Indices**: Must be in range [1, 6624]
+3. **Valid Indices**: Must be in range [1, 6623]
 
 ### Step 5: Character Mapping
 
@@ -203,7 +203,7 @@ dictionary[0] = "<blank>"  # Not in file, added programmatically
 dictionary[1] = first line of ppocr_keys_v1.txt
 dictionary[2] = second line of ppocr_keys_v1.txt
 ...
-dictionary[6624] = last line of ppocr_keys_v1.txt
+dictionary[6623] = last line of ppocr_keys_v1.txt
 ```
 
 **Mapping Process:**
@@ -212,7 +212,7 @@ For each predicted_index in decoded_indices:
     if predicted_index == 0:
         # Skip blank
         continue
-    else if predicted_index >= 1 and predicted_index <= 6624:
+    else if predicted_index >= 1 and predicted_index <= 6623:
         character = dictionary[predicted_index]
         append character to result
     else:
@@ -236,9 +236,9 @@ Value range: [0.0, 1.0]
 
 ### Model Output (Simplified)
 ```
-Shape: (1, 40, 6625)
-Logits at time step 0: [0.1, -2.3, 5.6, ..., -1.2]  (6625 values)
-Logits at time step 1: [0.3, -1.8, 4.2, ..., -0.9]  (6625 values)
+Shape: (1, 40, 6624)
+Logits at time step 0: [0.1, -2.3, 5.6, ..., -1.2]  (6624 values)
+Logits at time step 1: [0.3, -1.8, 4.2, ..., -0.9]  (6624 values)
 ...
 ```
 
@@ -280,7 +280,7 @@ When implementing this OCR system in any programming language:
 
 - [ ] Load ONNX model using compatible runtime (ONNX Runtime, TensorRT, etc.)
 - [ ] Load dictionary file with UTF-8 encoding
-- [ ] Parse dictionary line by line (6624 lines)
+- [ ] Parse dictionary line by line (6623 lines)
 - [ ] Add `<blank>` token at index 0
 - [ ] Implement image preprocessing:
   - [ ] Resize to 320×48
@@ -289,7 +289,7 @@ When implementing this OCR system in any programming language:
   - [ ] Transpose to NCHW format
   - [ ] Add batch dimension
 - [ ] Run model inference with input shape (1, 3, 48, 320)
-- [ ] Extract output with shape (1, 40, 6625)
+- [ ] Extract output with shape (1, 40, 6624)
 - [ ] Apply argmax along class dimension (axis=2)
 - [ ] Implement CTC decoding:
   - [ ] Remove blank tokens (index 0)
@@ -341,5 +341,5 @@ This process is independent of programming language and relies only on:
 
 **Version**: 1.0  
 **Model**: PaddleOCR v1  
-**Dictionary**: ppocr_keys_v1.txt (6624 characters)  
+**Dictionary**: ppocr_keys_v1.txt (6623 characters)  
 **Last Updated**: 2025-11-18
