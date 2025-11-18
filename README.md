@@ -11,6 +11,7 @@ Successfully implemented OCR pipeline with **90%+ accuracy** for Chinese text re
 ```
 ocr/
 ├── README.md                          # This file
+├── MODEL_USAGE.md                     # Language-agnostic model usage guide ⭐
 ├── paddle_ocr_final.py               # Main OCR script (FINAL VERSION)
 ├── final_ocr_results.json            # Previous test results
 ├── paddle_ocr_results_*.json         # Latest test results  
@@ -24,6 +25,19 @@ ocr/
 ├── ocr_env/                          # Python virtual environment
 └── .gitignore                        # Git ignore file
 ```
+
+## 📖 Documentation
+
+For a detailed, language-agnostic guide on how to use the OCR models and decode text using the dictionary file, see:
+
+**[MODEL_USAGE.md](MODEL_USAGE.md)** - Comprehensive guide covering:
+- Model architecture and specifications
+- Input/output formats
+- Dictionary file structure
+- Complete preprocessing pipeline
+- CTC decoding algorithm
+- Step-by-step examples with data flow
+- Implementation checklist for any programming language
 
 ## 🚀 Quick Start
 
