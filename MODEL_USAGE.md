@@ -325,7 +325,7 @@ These implementations demonstrate all the concepts described in this document.
 
 The OCR pipeline consists of:
 1. **Preprocess** image to (1, 3, 48, 320) tensor
-2. **Inference** recognition model to get (1, 40, 6625) logits
+2. **Inference** recognition model to get (1, 40, 6624) logits
 3. **ArgMax** to get class indices for 40 time steps
 4. **CTC Decode** to remove blanks and duplicates
 5. **Map** indices to characters using dictionary
